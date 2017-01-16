@@ -1,0 +1,109 @@
+@charset "UTF-8";
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: normal;
+  color: #333;
+}
+body{
+font-family:Avenir , "Open Sans" , "Helvetica Neue" , Helvetica , Arial , Verdana , Roboto , "游ゴシック" , "Yu Gothic" , "游ゴシック体" , "YuGothic" , "ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "Meiryo UI" , "メイリオ" , Meiryo , "ＭＳ Ｐゴシック" , "MS PGothic" , sans-serif;
+}
+a:hover{
+  text-decoration: none;
+}
+textarea{
+  min-width: 400px;
+  min-height: 100px;
+  border-color: #ddd;
+  padding: 5px;
+}
+button{
+  border: 1px solid #ddd;
+    background: #eee;
+}
+button:hover{
+  background: #fefefe;
+}
+body{
+  margin-bottom: 30px;
+}
+h1{
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+  font-size: 20px;
+  padding: 5px;
+}
+h2{
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  padding: 5px;
+  clear: both;
+}
+textarea{
+  margin: auto;
+  display: block;
+  padding: 5px;
+}
+.content{
+  margin: 0 auto;
+  width: 980px;
+}
+.btn{
+  text-align: center;
+  display: block;
+  margin: 20px auto 0;
+  padding: 5px;
+}
+
+.otameshi{
+  margin-top: 30px;
+  min-width: 600px;
+  min-height: 200px;
+}
+.back2list{
+  margin-left: 30px;
+  margin-bottom: 20px;
+}
+.back2list a{
+  padding: 10px 20px;
+  text-align: center;
+  background: #dedede;
+}
+.back2list a:hover{
+  text-decoration: none;
+}
+table{
+  border-collapse: collapse;
+}
+table td{
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* END */
