@@ -90,21 +90,30 @@ table td{
   z-index: 1;
 }
 .headerList{
-  max-width: 500px;
-  display: -webkit-flex;
-  display: -ms-flex;
-  display: flex;
-  margin: 0 auto;
+  display: block;
 }
 .headerList > .listFrame{
-  width:49%;
-  margin-right: 2%;
-}
-.headerList > .listFrame:nth-child(2n){
-  margin-right:  0;
+  width:90%;
+  margin: 0 auto 10px;
 }
 
 
+@media all and (min-width: 500px) {
+  .headerList{
+    max-width: 500px;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    margin: 0 auto;
+  }
+  .headerList > .listFrame{
+    width:49%;
+    margin-right: 2%;
+  }
+  .headerList > .listFrame:nth-child(2n){
+    margin-right:  0;
+  }
+}
 
 
 
