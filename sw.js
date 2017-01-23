@@ -10,18 +10,18 @@ window.addEventListener('load', function() {
       // 登録成功
         return registration.pushManager.getSubscription().then(function(subscription) {
           if (subscription) {
-            return subscription
+            return subscription;
           }
           return registration.pushManager.subscribe({
-            userVisibleOnly: true
+            userVisibleOnly: true;
           })
         })
       }).then(function(subscription) {
-        var endpoint = subscription.endpoint
-        console.log("pushManager endpoint:", endpoint) // https://android.googleapis.com/gcm/send/******:******......
+        var endpoint = subscription.endpoint;
+        console.log(endpoint); // https://android.googleapis.com/gcm/send/******:******......
       }).catch(function(error) {
         // 登録失敗 :(
-        console.warn("serviceWorker error:", error)
+        console.warn("serviceWorker error:", error);
       })
   }
 })
