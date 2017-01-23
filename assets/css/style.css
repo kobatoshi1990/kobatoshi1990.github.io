@@ -97,8 +97,11 @@ table td{
   margin: 0 auto;
 }
 .headerList > .listFrame{
-  width:48%;
+  width:49%;
   margin-right: 2%;
+}
+.headerList > .listFrame:nth-child(2n){
+  margin-right:  0;
 }
 
 
