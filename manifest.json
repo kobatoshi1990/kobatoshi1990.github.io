@@ -1,7 +1,7 @@
 {
    "lang":"ja",
-   "name":"kobaboo",
-   "short_name":"kobaboo",
+   "name":"こば的ブログ | こばぶー",
+   "short_name":"こばぶー",
    "icons":[
       {
          "src":"./assets/img/launcher_icon_144.png",
@@ -32,5 +32,7 @@
    "background_color":"#5383c3",
    "theme_color":"#ffffff",
    "start_url":"./index.html",
-   "display":"standalone"
+   "display":"standalone",
+   "gcm_sender_id": "AIzaSyDJQEMZYuMNnp0s5A7x2zB93a5gn31PiIk",
+   "gcm_user_visible_only": true
 }
