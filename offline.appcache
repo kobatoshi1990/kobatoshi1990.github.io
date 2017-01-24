@@ -1,10 +1,9 @@
 CACHE MANIFEST
 # 2017-01-23a
 
-# index.html
-# assets/css/style.css
-
 CACHE:
+index.html
+assets/css/style.css
 assets/img/150x150.png
 assets/img/logo.png
 
