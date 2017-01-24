@@ -371,6 +371,20 @@
   <footer class="footer">&copy; こば</footer><!-- END footer -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="assets/js/script.js"></script>
-  <script src="sw.js"></script>
+  <script>
+    //serviceWorker
+    window.addEventListener('load', function() {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').then(function(registration) {
+          // 登録成功
+          console.log("serviceWorker success!!");
+
+          }).catch(function(error) {
+            // 登録失敗 :(
+            console.warn("serviceWorker error:", error);
+          })
+      }
+    })
+  </script>
 </body>
 </html>
