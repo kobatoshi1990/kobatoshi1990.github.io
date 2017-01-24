@@ -1,47 +1,3 @@
-
-window.addEventListener('load', function() {
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').then(function(registration) {
-      // 登録成功
-        // return registration.pushManager.getSubscription().then(function(subscription) {
-        //   if (subscription) {
-        //     return subscription;
-        //   }
-        //   return registration.pushManager.subscribe({
-        //     userVisibleOnly: true
-        //   })
-        // })
-      //}).then(function(subscription) {
-      //  var endpoint = subscription.endpoint;
-      //  console.log(endpoint); // https://android.googleapis.com/gcm/send/******:******......
-      }).catch(function(error) {
-        // 登録失敗 :(
-        console.warn("serviceWorker error:", error);
-
-// window.addEventListener('load', function() {
-//   if ('serviceWorker' in navigator) {
-//     navigator.serviceWorker.register('/sw.js').then(function(registration) {
-//       // 登録成功
-//         return registration.pushManager.getSubscription().then(function(subscription) {
-//           if (subscription) {
-//             return subscription;
-//           }
-//           return registration.pushManager.subscribe({
-//             userVisibleOnly: true;
-//           })
-//         })
-//       }).then(function(subscription) {
-//         var endpoint = subscription.endpoint;
-//         console.log(endpoint); // https://android.googleapis.com/gcm/send/******:******......
-//       }).catch(function(error) {
-//         // 登録失敗 :(
-//         console.warn("serviceWorker error:", error);
-//       })
-//   }
-// })
-
-
-
 /*
  Copyright 2015 Google Inc. All Rights Reserved.
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -135,7 +91,6 @@ self.addEventListener('fetch', event => {
         // errors, see https://github.com/GoogleChrome/samples/tree/gh-pages/service-worker/fallback-response
         console.log('Fetch failed; returning offline page instead.', error);
         return caches.match(OFFLINE_URL);
-
       })
     );
   }
