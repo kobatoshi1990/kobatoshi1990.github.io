@@ -1,11 +1,11 @@
 CACHE MANIFEST
 # 2017-01-24bb
 
-# NETWORK:
-# index.html
-# assets/css/style.css
-# assets/img/150x150.png
-# assets/img/logo.png
+NETWORK:
+index.html
+assets/css/style.css
+assets/img/150x150.png
+assets/img/logo.png
 
 NETWORK:
 *
