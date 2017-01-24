@@ -6,3 +6,6 @@ CACHE MANIFEST
 # assets/css/style.css
 # assets/img/150x150.png
 # assets/img/logo.png
+
+NETWORK:
+*
