@@ -17,7 +17,7 @@ window.addEventListener('load', function() {
       }).catch(function(error) {
         // 登録失敗 :(
         console.warn("serviceWorker error:", error);
-=======
+
 // window.addEventListener('load', function() {
 //   if ('serviceWorker' in navigator) {
 //     navigator.serviceWorker.register('/sw.js').then(function(registration) {
