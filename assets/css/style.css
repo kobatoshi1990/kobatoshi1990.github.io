@@ -169,6 +169,13 @@ table td{
   margin: 0 auto 10px;
 }
 
+.offlineBlock img{
+  display: block;
+  width: 316px;
+  margin: 10px auto;
+}
+
+
 /* article_block */
 .article_block{
   min-height: 800px
