@@ -1,0 +1,22 @@
+html,
+body {
+    font-size: 1.1em;
+}
+.article{
+  list-style-type: none;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #dedede;
+}
+.article:last-child{
+  border-bottom: 0;
+}
+.article a{
+  display: block;
+}
+.article img{
+  margin-right:  10px;
+}
+h3{
+  margin-bottom: 30px;
+}
