@@ -1,8 +1,8 @@
 var myApp = angular.module('myApp', ['ngRoute']);
 
+
 // Routing
 myApp.config(function($routeProvider){
-
   $routeProvider
   .when('/', {
     templateUrl : 'pages/home.html',
@@ -15,55 +15,65 @@ myApp.config(function($routeProvider){
   .otherwise({
     redirectTo: '/'
   })
-
 });
+
+//html5 mode
+myApp.config(function($locationProvider){
+  $locationProvider.html5Mode(true);
+})
 
 
 //  Value for getJson
-// myApp.value('getJson', ['$http','$scope', function( $http, $scope ){
-//
-//   $http.get('db.json')
-//     .then(function(result){
-//       $scope.articleData = result.data.data;
-//     })
-//
-// }]);
+myApp.factory('jsonData', function ( $http ) {
+
+  return{
+    getData: function(){
+      //データアクセス
+      return $http.get('db.json')
+        .then(function(result){
+          //データ取得
+          return result
+        })
+        .catch(function (err) {
+           // 失敗した場合はエラーが吐く
+            console.log(err);
+        });
+    }
+  }
+});
 
 
 // Controller for Main
-myApp.controller('mainController', ['$scope', '$http', function ($scope, $http) {
+myApp.controller('mainController', ['$scope', '$http', 'jsonData', function ($scope, $http, jsonData) {
 
-
-  // Jsonを取得
-  $http.get('db.json')
-      .then(function (result) {
-        // 成功した場合、データを$scope.articleDataに入れる
-          $scope.articleData = result.data.data;
-          //console.log($scope.articleData);
-      })
-      .catch(function (err) {
-         // 失敗した場合はエラーが吐く
-          console.log(err);
-      });
-
+  jsonData.getData()
+  .then(function(result){
+    $scope.articleData = result.data.dataArticle;
+  })
+  .catch(function (err) {
+     // 失敗した場合はエラーが吐く
+      console.log(err);
+  });
 }]);
 
 // Controller for Page
-myApp.controller('pageController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+myApp.controller('pageController', ['$scope', '$http', '$routeParams', '$filter', 'jsonData', function ($scope, $http, $routeParams, $filter, jsonData) {
 
   // URLパラメータ処理
   $scope.num = $routeParams.num;
 
-  //Json取得
-  $http.get('db.json')
-      .then(function (result) {
-        // 成功した場合、データを$scope.articleDataに入れる
-          $scope.articleData = result.data;
-          console.log($scope.articleData);
-      })
-      .catch(function (err) {
-        // 失敗した場合はエラーが吐く
-          console.log(err);
-      });
+
+  jsonData.getData()
+  .then(function(result){
+    $scope.articleData = result.data.dataArticle;
+    console.log($scope.articleData);
+  })
+  .catch(function (err) {
+     // 失敗した場合はエラーが吐く
+      console.log(err);
+  });
+
+
+
 
 }]);
