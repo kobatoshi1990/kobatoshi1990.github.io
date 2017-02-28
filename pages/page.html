@@ -1,15 +1,18 @@
-<div ng-repeat="data in articleData | filter : { id: num } ">
+<div ng-repeat="data in articleData | filter : pageFilter ">
 
 <h3>タイトル：{{data.title}}</h3>
 
   サムネ：<img ng-src="{{ data.image }}" alt="">
   <br /><br />
 
+  id : {{ data.id }}
 
   本文：【ダミー文章です→】{{ data.article }}
-  <br /><br />
-  テスト →　{{ data }}
 
+  <!--
+    <br /><br />
+    テスト →　{{ data }}
+  -->
   <br /><br /><br /><br />
 
 </div>

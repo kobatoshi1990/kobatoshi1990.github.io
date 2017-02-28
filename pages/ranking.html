@@ -1,0 +1,25 @@
+<h3>Ranking</h3>
+<!--
+<ul>
+    <li class="article" ng-repeat="data in articleData | orderBy: 'populate'">
+        <a c>
+          <img ng-src="{{ data.image }}" alt="">
+          {{ data.title }}
+        </a>
+    </li>
+</ul>
+-->
+
+<div class="media" ng-repeat="data in articleData | orderBy: 'populate' :true">
+
+    <div class="media-left">
+      <a ng-href="pages/{{ data.id }}">
+        <img class="media-object" ng-src="{{ data.image }}" alt="{{ data.title }}" width="50">
+      </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading"><a ng-href="pages/{{ data.id }}">{{ data.title }}</a></h4>
+      <p>{{ data.article | limitTo:articleLimit }}...  <a ng-href="pages/{{ data.id }}">続きを読む</a></p>
+    </div>
+
+</div>
