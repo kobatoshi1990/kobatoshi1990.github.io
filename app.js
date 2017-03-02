@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ngStorage', 'ngAnimate']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngResource', 'ngStorage', 'angular-toArrayFilter']);
 
 
 // Routing
@@ -21,88 +21,63 @@ myApp.config(function($routeProvider){
   })
 });
 
+// For Json => Localhost
+myApp.config(['$localStorageProvider',
+    function ($localStorageProvider) {
+        $localStorageProvider.setKeyPrefix('article_');
+    }]);
+
 //html5 mode
 myApp.config(function($locationProvider){
   $locationProvider.html5Mode(true);
 })
 
 
-//  Value for getJson
-myApp.factory('jsonData', function ( $http ) {
+myApp.factory('registarJson', ['$resource', '$localStorage', function($resource, $localStorage){
+  // $resource(ngResource)を使って読み込む
+  var res = $resource('db.json');
 
+  // $resourceは遅延実行なので$promiseを使ってデータを取得できるまで
+  // 待ってから$localStorageへ保存
+  var data = res.query();
+
+  data.$promise.then(function(){
+    $localStorage.$default(data); // localStorageの$defaultへ
+  });
+
+  // factoryサービスのreturn部
   return{
-    getData: function(){
-      //データアクセス
-      return $http.get('db.json')
-        .then(function(result){
-          //データ取得
-          return result
-        })
-        .catch(function (err) {
-           // 失敗した場合はエラーが吐く
-            console.log(err);
-        });
+    all: function(){
+      return $localStorage; // $localStorageを返す
     }
-  }
-});
+  };
+}])
+
+
+
+
 
 
 // ▼ for Main
-myApp.controller('mainController', ['$scope', '$http', '$localStorage', 'jsonData', function ($scope, $http, $localStorage, jsonData) {
-
-  // get Data
-  jsonData.getData()
-  .then(function(result){
-    $scope.articleData = result.data.dataArticle;
-  })
-  .catch(function (err) {
-     // 失敗した場合はエラーが吐く
-      console.log(err);
-  });
-
+myApp.controller('mainController', ['$scope', '$http', '$localStorage', 'registarJson', function ($scope, $http, $localStorage, registarJson) {
 
   $scope.articleLimit = 50;
-
-  // 【記事を想定】クリックした際にlocalStorageにしまい込む
-
-    // 引数numとは data.idで、記事のid
-    // 変数idは配列内のid、変数countは配列内のcount
-    //【はじめてのクリック】配列内のidとnumがアンイコール → idに対してcount+1というセットを作成
-    //【二度以上クリック】配列内のidとnumがイコール → idに対してカウント+1
-
-    //var id = $scope.$storage.aryCounter.id;
-    //var counter = $$scope.$storage.aryCounter.counter;
-
-    //if($localStorage.aryCounter == null){
-      //Lにハッシュがない→新たにハッシュを作成し、Lに保存
-      // var aryCounter = {};
-      // var cid = 'id_' + id;
-      // console.dir( cid );
-      // aryCounter = { cid : 1 };
-      // $localStorage.aryCounter;
-      //
-      // console.dir( aryCounter );
-
+  $scope.articleData = registarJson.all();
+  console.log(  $scope.articleData );
 
 }]);
 
 
 
 // ▼for Ranking
-myApp.controller('rankingController',['$scope', '$http', '$localStorage', 'jsonData', function ($scope, $http, $localStorage, jsonData){
+myApp.controller('rankingController',['$scope', '$http', '$localStorage', function ( $scope, $http, $localStorage){
 
-  // get Data
-  jsonData.getData()
-  .then(function(result){
-    $scope.articleData = result.data.dataArticle;
-  })
-  .catch(function (err) {
-     // 失敗した場合はエラーが吐く
-      console.log(err);
-  });
+  // ローカルストレージ内を格納
+  $scope.articleData = $localStorage;
+  console.log($scope.articleData);
 
   // 文字数制限
-  $scope.articleLimit = 80;
+  $scope.articleLimit = 180;
 
 
 }]);
@@ -110,43 +85,16 @@ myApp.controller('rankingController',['$scope', '$http', '$localStorage', 'jsonD
 
 
 // ▼for Page
-myApp.controller('pageController', ['$scope', '$http', '$routeParams', '$filter', 'jsonData', function ($scope, $http, $routeParams, $filter, jsonData) {
+myApp.controller('pageController', ['$scope', '$http', '$routeParams', '$filter', '$localStorage', function ($scope, $http, $routeParams, $filter, $localStorage) {
 
   // URLパラメータ処理
   $scope.num = $routeParams.num;
 
-
-  // 記事の書き出し
-  jsonData.getData()
-  .then(function(result){
-    $scope.articleData = result.data.dataArticle;
-
-    //console.log($scope.articleData);
-    //console.log("id =" + $scope.articleData.id);
-    //console.log("num =" + $scope.num);
-  })
-  .catch(function (err) {
-     // 失敗した場合はエラーが吐く
-      console.log(err);
-  });
+  $scope.articleData = $localStorage;
 
   $scope.pageFilter = function( value, index ){
     return value.id == $scope.num;
   }
-
-  // localStorageに記事データを保存したい
-  // $scope.$storage = $localStorage.$default({
-  //   aryCounter: {
-  //     id : '',
-  //     counter : ''
-  //   }
-  // });
-  //
-  // $scope.$storage.aryCounter.id = num;
-  // $scope.$storage.aryCounter.counter ++;
-  // console.log($scope.$storage.aryCounter);
-
-
 
 
 }]);
