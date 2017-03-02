@@ -1,4 +1,4 @@
-<div ng-repeat="data in articleData | filter : pageFilter ">
+<div ng-repeat="data in articleData | toArray:false | filter : pageFilter ">
 
 <h3>タイトル：{{data.title}}</h3>
 
@@ -6,6 +6,8 @@
   <br /><br />
 
   id : {{ data.id }}
+
+  <br /><br />
 
   本文：【ダミー文章です→】{{ data.article }}
 

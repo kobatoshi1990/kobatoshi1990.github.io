@@ -8,9 +8,11 @@
         </a>
     </li>
 </ul>
--->
 
 <div class="media" ng-repeat="data in articleData | orderBy: 'populate' :true">
+-->
+
+<div class="media" ng-repeat="data in articleData | toArray:false | orderBy: '-populate' | filter : { populate: '' } ">
 
     <div class="media-left">
       <a ng-href="pages/{{ data.id }}">
