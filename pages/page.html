@@ -1,20 +1,17 @@
 <div ng-repeat="data in articleData | toArray:false | filter : pageFilter ">
 
-<h3>タイトル：{{data.title}}</h3>
+  <div class="jumbotron" style="background-image:url('{{ data.image }}');">
+    <h1 style="font-weight:bold;">{{data.title}}</h1>
+    <p>個別ページです。個別記事を出力してます。</p>
+  </div>
 
-  サムネ：<img ng-src="{{ data.image }}" alt="">
-  <br /><br />
 
-  id : {{ data.id }}
 
-  <br /><br />
+  <p>サムネ：<img ng-src="{{ data.image }}" alt=""></p>
 
-  本文：【ダミー文章です→】{{ data.article }}
+  <p>id : {{ data.id }}</p>
 
-  <!--
-    <br /><br />
-    テスト →　{{ data }}
-  -->
-  <br /><br /><br /><br />
+
+  <p>本文：【ダミー文章です→】{{ data.article }}</p>
 
 </div>
