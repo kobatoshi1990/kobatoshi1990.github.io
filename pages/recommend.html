@@ -1,7 +1,8 @@
 <div class="jumbotron">
-  <h1>Ranking</h1>
-  <p>ランキングページです。JSONから得られた人気指数を元に、Angularで並び替えしてます。</p>
+  <h1>Recommend</h1>
+  <p>リコメンドページです。</p>
 </div>
+
 
 <div class="media" ng-repeat="data in articleData | toArray:false | orderBy: '-populate' | filter : { populate: '' } ">
 

@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ngResource', 'ngStorage', 'angular-toArrayFilter']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngResource', 'ngStorage', 'angular-toArrayFilter', 'ngAnimate']);
 
 
 // Routing
@@ -16,16 +16,14 @@ myApp.config(function($routeProvider){
     templateUrl : 'pages/ranking.html',
     controller : 'rankingController'
   })
+  .when('/recommend',{
+    templateUrl : 'pages/recommend.html',
+    controlelr : 'recommendController'
+  })
   .otherwise({
     redirectTo: '/'
   })
 });
-
-// For Json => Localhost
-myApp.config(['$localStorageProvider',
-    function ($localStorageProvider) {
-        $localStorageProvider.setKeyPrefix('article_');
-    }]);
 
 //html5 mode
 myApp.config(function($locationProvider){
@@ -33,6 +31,11 @@ myApp.config(function($locationProvider){
 })
 
 
+// JsonをLocalStorageに入れる
+myApp.config(['$localStorageProvider',
+    function ($localStorageProvider) {
+        $localStorageProvider.setKeyPrefix('article_');
+    }]);
 myApp.factory('registarJson', ['$resource', '$localStorage', function($resource, $localStorage){
   // $resource(ngResource)を使って読み込む
   var res = $resource('db.json');
@@ -58,43 +61,53 @@ myApp.factory('registarJson', ['$resource', '$localStorage', function($resource,
 
 
 
-// ▼ for Main
+// ▼ Main Controller
 myApp.controller('mainController', ['$scope', '$http', '$localStorage', 'registarJson', function ($scope, $http, $localStorage, registarJson) {
 
   $scope.articleLimit = 50;
-  $scope.articleData = registarJson.all();
-  console.log(  $scope.articleData );
+  // $scope.articleData = registarJson.all();
 
-}]);
-
-
-
-// ▼for Ranking
-myApp.controller('rankingController',['$scope', '$http', '$localStorage', function ( $scope, $http, $localStorage){
-
-  // ローカルストレージ内を格納
   $scope.articleData = $localStorage;
   console.log($scope.articleData);
+  console.log($localStorage);
 
-  // 文字数制限
-  $scope.articleLimit = 180;
 
+  // if( $localStorage = null ){
+  //   $scope.articleData = registarJson.all();
+  //   console.log("a");
+  // }else{
+  //   $scope.articleData = $localStorage;
+  //   console.log("b");
+  // }
 
 }]);
 
 
 
-// ▼for Page
+// ▼ Ranking Controller
+myApp.controller('rankingController',['$scope', '$http', '$localStorage', function ( $scope, $http, $localStorage){
+
+  // ローカルストレージ内のデータを格納
+  $scope.articleData = $localStorage;
+
+  // 文字数制限
+  $scope.articleLimit = 80;
+
+}]);
+
+
+
+// ▼ Page Controller
 myApp.controller('pageController', ['$scope', '$http', '$routeParams', '$filter', '$localStorage', function ($scope, $http, $routeParams, $filter, $localStorage) {
 
   // URLパラメータ処理
   $scope.num = $routeParams.num;
 
+  // ローカルストレージ内のデータを格納
   $scope.articleData = $localStorage;
 
   $scope.pageFilter = function( value, index ){
     return value.id == $scope.num;
   }
-
 
 }]);
